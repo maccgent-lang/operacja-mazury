@@ -20,6 +20,72 @@
 - Każdy task musi mieć acceptance criteria.
 - Każdy task musi kończyć się działającą aplikacją.
 
+## Quality Gates
+
+### QG1 — Static mock dashboard complete
+
+After T04.
+
+Required:
+- `pnpm lint`
+- `pnpm build`
+- manual mobile check
+- dashboard renders with mock data
+- no Supabase
+- no ranking
+- no shaming copy
+
+### QG2 — Game config and local logic complete
+
+After T10.
+
+Required:
+- `pnpm lint`
+- `pnpm build`
+- `pnpm test`
+- scoring tests pass
+- progress/milestone tests pass
+- badge tests pass
+- prenatal filtering tests pass
+
+### QG3 — Mock form complete
+
+After T12.
+
+Required:
+- `pnpm lint`
+- `pnpm build`
+- manual form smoke test
+- point preview works
+- prenatal-friendly player sees safe activities first
+- no real persistence yet
+
+### QG4 — Supabase persistence complete
+
+After T16.
+
+Required:
+- `pnpm lint`
+- `pnpm build`
+- manual add activity test
+- activity persists in Supabase
+- points are calculated server-side
+- TEAM_WRITE_CODE works
+- no service role key leaks to client
+
+### QG5 — MVP release candidate
+
+After T19.
+
+Required:
+- `pnpm lint`
+- `pnpm build`
+- mobile smoke test
+- Vercel deploy works
+- public link works
+- add activity flow works end-to-end
+- dashboard updates after activity
+
 ---
 
 ## Faza 0 — Project workflow
