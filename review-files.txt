@@ -1,0 +1,16 @@
+M	.gitignore
+M	app/globals.css
+M	app/page.tsx
+A	components/ActivityFeed.tsx
+A	components/AppShell.tsx
+A	components/PlayerCard.tsx
+A	components/ProgressBar.tsx
+A	docs/AI_RULES.md
+A	docs/AI_WORKFLOW.md
+A	docs/ARCHITECTURE.md
+A	docs/DECISIONS.md
+A	docs/PROJECT_BRIEF.md
+A	docs/REVIEW_CHECKLIST.md
+A	docs/TASKS.md
+A	lib/mock-data.ts
+A	types/domain.ts

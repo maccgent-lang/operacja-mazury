@@ -1,0 +1,17 @@
+ .gitignore                  |   4 +
+ app/globals.css             | 125 ++++-----
+ app/page.tsx                |  64 +----
+ components/ActivityFeed.tsx |  62 +++++
+ components/AppShell.tsx     |  91 +++++++
+ components/PlayerCard.tsx   |  55 ++++
+ components/ProgressBar.tsx  |  34 +++
+ docs/AI_RULES.md            |  67 +++++
+ docs/AI_WORKFLOW.md         | 212 ++++++++++++++++
+ docs/ARCHITECTURE.md        |  49 ++++
+ docs/DECISIONS.md           |  66 +++++
+ docs/PROJECT_BRIEF.md       |  38 +++
+ docs/REVIEW_CHECKLIST.md    |  52 ++++
+ docs/TASKS.md               | 601 ++++++++++++++++++++++++++++++++++++++++++++
+ lib/mock-data.ts            |  80 ++++++
+ types/domain.ts             |  24 ++
+ 16 files changed, 1501 insertions(+), 123 deletions(-)
