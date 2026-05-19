@@ -19,7 +19,10 @@ export function AppShell() {
   }
 
   for (const log of mockActivityLogs) {
-    playerPoints.set(log.playerId, (playerPoints.get(log.playerId) ?? 0) + log.points);
+    playerPoints.set(
+      log.playerId,
+      (playerPoints.get(log.playerId) ?? 0) + log.points,
+    );
   }
 
   const playerNames = new Map(
@@ -39,15 +42,19 @@ export function AppShell() {
     }));
 
   return (
-    <main className="min-h-screen bg-background px-4 py-6 text-foreground sm:px-6 sm:py-10">
+    <main className="min-h-screen bg-transparent px-4 py-6 text-foreground sm:px-6 sm:py-10">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
-        <section className="flex flex-col gap-4">
-          <p className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
-            Dashboard
+        <section className="flex flex-col gap-4 rounded-xl border border-border/70 bg-card/45 p-5 shadow-2xl shadow-black/20 backdrop-blur sm:p-6">
+          <p className="text-sm font-medium uppercase tracking-wide text-accent">
+            Team quest dashboard
           </p>
-          <h1 className="text-3xl font-semibold tracking-tight sm:text-5xl">
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
             Operacja Mazury
           </h1>
+          <p className="max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
+            Shared movement toward the lake, with every entry adding to the
+            crew total.
+          </p>
         </section>
 
         <ProgressBar
@@ -61,9 +68,9 @@ export function AppShell() {
 
           <section className="flex flex-col gap-3">
             <div>
-              <h2 className="text-xl font-semibold tracking-tight">Crew</h2>
+              <h2 className="text-xl font-semibold tracking-tight">Załoga</h2>
               <p className="text-sm text-muted-foreground">
-                Personal totals from mock activity logs.
+                Neutral crew profiles for the shared trip effort.
               </p>
             </div>
 
