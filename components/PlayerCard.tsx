@@ -1,8 +1,11 @@
+import { ClassSelect } from "@/components/ClassSelect";
+import { getCharacterClassConfig } from "@/config/classes";
 import type { Player } from "@/types/domain";
 
 type PlayerCardProps = {
   player: Player;
   points: number;
+  isSupabaseConfigured: boolean;
 };
 
 const classFlavor: Record<Player["characterClass"], string> = {
@@ -14,20 +17,17 @@ const classFlavor: Record<Player["characterClass"], string> = {
   bard: "Podtrzymuje ducha wyprawy między jednym wpisem a drugim.",
 };
 
-const classLabels: Record<Player["characterClass"], string> = {
-  tank: "Tank",
-  scout: "Zwiadowca",
-  monk: "Mnich",
-  berserker: "Berserker",
-  healer: "Uzdrowiciel",
-  bard: "Bard",
-};
-
 function formatCharacterClass(characterClass: Player["characterClass"]) {
-  return classLabels[characterClass];
+  return getCharacterClassConfig(characterClass).label;
 }
 
-export function PlayerCard({ player, points }: PlayerCardProps) {
+export function PlayerCard({
+  player,
+  points,
+  isSupabaseConfigured,
+}: PlayerCardProps) {
+  const classConfig = getCharacterClassConfig(player.characterClass);
+
   return (
     <article className="rounded-lg border border-border/80 bg-card/80 p-4 text-card-foreground shadow-lg shadow-black/10">
       <div className="flex items-start gap-3">
@@ -40,6 +40,9 @@ export function PlayerCard({ player, points }: PlayerCardProps) {
             <h3 className="font-semibold text-foreground">{player.name}</h3>
             <span className="rounded-md border border-border/70 px-2 py-0.5 text-xs text-muted-foreground">
               {formatCharacterClass(player.characterClass)}
+            </span>
+            <span className="rounded-md border border-accent/40 bg-accent/10 px-2 py-0.5 text-xs text-accent">
+              {classConfig.bonusLabel}
             </span>
           </div>
           <p className="mt-2 text-sm leading-5 text-muted-foreground">
@@ -55,10 +58,19 @@ export function PlayerCard({ player, points }: PlayerCardProps) {
 
         {player.isPrenatalFriendly ? (
           <span className="rounded-md border border-secondary/60 bg-secondary/35 px-2 py-1 text-secondary-foreground">
-            Tryb prenatal-friendly
+            Tryb bezpieczny: spokojne aktywności punktują wyżej
           </span>
         ) : null}
       </div>
+
+      {!player.classLocked ? (
+        <ClassSelect
+          classLocked={player.classLocked}
+          currentClass={player.characterClass}
+          isSupabaseConfigured={isSupabaseConfigured}
+          playerKey={player.id}
+        />
+      ) : null}
     </article>
   );
 }

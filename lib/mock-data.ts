@@ -1,79 +1,54 @@
-import type { ActivityLog, Player } from "@/types/domain";
+import { PLAYERS } from "@/config/players";
+import type { ActivityLog } from "@/types/domain";
 
-export const mockPlayers: Player[] = [
-  {
-    id: "player-anna",
-    name: "Anna",
-    characterClass: "healer",
-    isPrenatalFriendly: true,
-  },
-  {
-    id: "player-bartek",
-    name: "Bartek",
-    characterClass: "tank",
-    isPrenatalFriendly: false,
-  },
-  {
-    id: "player-celina",
-    name: "Celina",
-    characterClass: "scout",
-    isPrenatalFriendly: false,
-  },
-  {
-    id: "player-damian",
-    name: "Damian",
-    characterClass: "berserker",
-    isPrenatalFriendly: false,
-  },
-  {
-    id: "player-eliza",
-    name: "Eliza",
-    characterClass: "monk",
-    isPrenatalFriendly: false,
-  },
-];
+export const mockPlayers = PLAYERS;
 
 export const mockActivityLogs: ActivityLog[] = [
   {
     id: "log-001",
-    playerId: "player-anna",
+    playerId: "aniela",
     activityKey: "walk",
-    quantity: 35,
-    points: 35,
+    quantity: 30,
+    points: 238,
+    durationBucket: "normal",
     occurredOn: "2026-05-10",
     note: "Spokojny spacer nad jeziorem.",
   },
   {
     id: "log-002",
-    playerId: "player-bartek",
-    activityKey: "strength-training",
-    quantity: 45,
-    points: 60,
+    playerId: "wojtek",
+    activityKey: "strength",
+    quantity: 50,
+    points: 360,
+    durationBucket: "solid",
     occurredOn: "2026-05-11",
   },
   {
     id: "log-003",
-    playerId: "player-celina",
-    activityKey: "bike",
+    playerId: "weronika",
+    activityKey: "calm_swim_bike",
     quantity: 50,
-    points: 70,
+    points: 392,
+    durationBucket: "solid",
     occurredOn: "2026-05-12",
     note: "Lekka trasa po pracy.",
   },
   {
     id: "log-004",
-    playerId: "player-damian",
-    activityKey: "run",
+    playerId: "kuba",
+    activityKey: "cardio",
     quantity: 30,
-    points: 45,
+    points: 290,
+    durationBucket: "normal",
     occurredOn: "2026-05-13",
   },
   {
     id: "log-005",
-    playerId: "player-eliza",
+    playerId: "maciek",
     activityKey: "mobility",
-    quantity: 25,
-    points: 25,
+    quantity: 30,
+    points: 150,
+    durationBucket: "normal",
     occurredOn: "2026-05-14",
     note: "Rozciąganie i mobilność.",
   },
