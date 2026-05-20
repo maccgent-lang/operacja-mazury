@@ -2,6 +2,7 @@ import { ActivityFeed, type ActivityFeedItem } from "@/components/ActivityFeed";
 import { ActivityForm } from "@/components/ActivityForm";
 import { PlayerCard } from "@/components/PlayerCard";
 import { ProgressBar } from "@/components/ProgressBar";
+import { TripCountdown } from "@/components/TripCountdown";
 import { ACTIVITIES, DURATION_BUCKETS } from "@/config/activities";
 import { GAME_CONFIG } from "@/config/game";
 import {
@@ -82,6 +83,8 @@ export function AppShell({
             Każdy wpis dokłada coś do wspólnej drogi nad jezioro.
           </p>
         </section>
+
+        <TripCountdown tripDate={GAME_CONFIG.tripDate} />
 
         <ProgressBar
           currentPoints={totalPoints}
