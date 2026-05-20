@@ -6,6 +6,18 @@ export type CharacterClass =
   | "healer"
   | "bard";
 
+export type ActivityCategory =
+  | "light"
+  | "medium"
+  | "strength"
+  | "cardio"
+  | "mobility"
+  | "regeneration"
+  | "prenatal"
+  | "challenge";
+
+export type ActivityUnit = "minutes" | "reps" | "session";
+
 export type Player = {
   id: string;
   name: string;

@@ -6,16 +6,25 @@ type PlayerCardProps = {
 };
 
 const classFlavor: Record<Player["characterClass"], string> = {
-  tank: "Keeps the crew steady when the trail gets muddy.",
-  scout: "Finds a good route and keeps the pace friendly.",
-  monk: "Brings calm movement and patient consistency.",
-  berserker: "Adds a burst of energy when the quest needs it.",
-  healer: "Looks after the crew and keeps the journey kind.",
-  bard: "Keeps spirits warm between one entry and the next.",
+  tank: "Trzyma załogę stabilnie, nawet gdy szlak robi się grząski.",
+  scout: "Wypatruje dobrej trasy i dba o przyjazne tempo wyprawy.",
+  monk: "Wnosi spokój, ruch i cierpliwą regularność.",
+  berserker: "Dodaje energii, gdy wyprawa potrzebuje mocniejszego zrywu.",
+  healer: "Dba o załogę i łagodny rytm wspólnej drogi.",
+  bard: "Podtrzymuje ducha wyprawy między jednym wpisem a drugim.",
+};
+
+const classLabels: Record<Player["characterClass"], string> = {
+  tank: "Tank",
+  scout: "Zwiadowca",
+  monk: "Mnich",
+  berserker: "Berserker",
+  healer: "Uzdrowiciel",
+  bard: "Bard",
 };
 
 function formatCharacterClass(characterClass: Player["characterClass"]) {
-  return characterClass.slice(0, 1).toUpperCase() + characterClass.slice(1);
+  return classLabels[characterClass];
 }
 
 export function PlayerCard({ player, points }: PlayerCardProps) {
@@ -46,7 +55,7 @@ export function PlayerCard({ player, points }: PlayerCardProps) {
 
         {player.isPrenatalFriendly ? (
           <span className="rounded-md border border-secondary/60 bg-secondary/35 px-2 py-1 text-secondary-foreground">
-            Prenatal-friendly
+            Tryb prenatal-friendly
           </span>
         ) : null}
       </div>
