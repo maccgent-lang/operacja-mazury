@@ -26,7 +26,7 @@ const teamCodeStorageKey = "operacja-mazury-team-code";
 function SubmitButton() {
   return (
     <button
-      className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
+      className="w-full rounded-lg bg-primary px-4 py-3 text-sm font-semibold text-primary-foreground sm:w-auto sm:py-2"
       type="submit"
     >
       Dodaj wpis
@@ -100,31 +100,31 @@ export function ActivityForm({
     Boolean(selectedActivity?.intense);
 
   return (
-    <section className="rounded-xl border border-border/80 bg-card/80 p-4 text-card-foreground shadow-lg shadow-black/15 sm:p-5">
-      <div className="mb-4">
+    <section className="w-full max-w-full overflow-hidden rounded-xl border border-border/80 bg-card/80 p-4 text-card-foreground shadow-lg shadow-black/15 sm:p-5">
+      <div className="mb-4 min-w-0">
         <h2 className="text-xl font-semibold tracking-tight">Dodaj aktywność</h2>
-        <p className="text-sm text-muted-foreground">
+        <p className="break-words text-sm text-muted-foreground">
           Wpis trafi do wspólnego dziennika załogi.
         </p>
       </div>
 
-      <p className="mb-4 rounded-lg border border-border/70 bg-muted p-3 text-sm text-muted-foreground">
+      <p className="mb-4 break-words rounded-lg border border-border/70 bg-muted p-3 text-sm text-muted-foreground">
         Wybieraj tylko aktywności komfortowe i zgodne z zaleceniami lekarza lub
         fizjo. Punkty są mniej ważne niż człowiek.
       </p>
 
       {!isSupabaseConfigured ? (
-        <p className="mb-4 rounded-lg border border-accent/40 bg-muted p-3 text-sm text-muted-foreground">
+        <p className="mb-4 break-words rounded-lg border border-accent/40 bg-muted p-3 text-sm text-muted-foreground">
           Brakuje konfiguracji Supabase. Dashboard działa, ale zapis aktywności
           wymaga zmiennych środowiskowych.
         </p>
       ) : null}
 
-      <form action={formAction} className="grid gap-4">
-        <label className="grid gap-2 text-sm">
+      <form action={formAction} className="grid min-w-0 gap-4">
+        <label className="grid min-w-0 gap-2 text-sm">
           <span className="text-muted-foreground">Członek załogi</span>
           <select
-            className="rounded-lg border border-border bg-background px-3 py-2 text-foreground"
+            className="w-full max-w-full rounded-lg border border-border bg-background px-3 py-3 text-foreground sm:py-2"
             name="playerKey"
             onChange={(event) => setPlayerKey(event.target.value)}
             value={playerKey}
@@ -137,10 +137,10 @@ export function ActivityForm({
           </select>
         </label>
 
-        <label className="grid gap-2 text-sm">
+        <label className="grid min-w-0 gap-2 text-sm">
           <span className="text-muted-foreground">Aktywność</span>
           <select
-            className="rounded-lg border border-border bg-background px-3 py-2 text-foreground"
+            className="w-full max-w-full rounded-lg border border-border bg-background px-3 py-3 text-foreground sm:py-2"
             name="activityKey"
             onChange={(event) => setActivityKey(event.target.value)}
             value={selectedActivity?.key ?? ""}
@@ -153,16 +153,16 @@ export function ActivityForm({
             ))}
           </select>
           {showComfortWarning ? (
-            <span className="w-fit rounded-full border border-amber-300/50 bg-amber-300/10 px-3 py-1 text-xs font-medium text-amber-100">
+            <span className="max-w-full break-words rounded-full border border-amber-300/50 bg-amber-300/10 px-3 py-1 text-xs font-medium text-amber-100">
               ⚠️ tylko jeśli to dla Ciebie komfortowe
             </span>
           ) : null}
         </label>
 
-        <label className="grid gap-2 text-sm">
+        <label className="grid min-w-0 gap-2 text-sm">
           <span className="text-muted-foreground">Czas</span>
           <select
-            className="rounded-lg border border-border bg-background px-3 py-2 text-foreground"
+            className="w-full max-w-full rounded-lg border border-border bg-background px-3 py-3 text-foreground sm:py-2"
             name="durationBucket"
             onChange={(event) =>
               setDurationBucket(event.target.value as DurationBucketKey)
@@ -177,42 +177,42 @@ export function ActivityForm({
           </select>
         </label>
 
-        <label className="grid gap-2 text-sm">
+        <label className="grid min-w-0 gap-2 text-sm">
           <span className="text-muted-foreground">Notatka</span>
           <textarea
-            className="min-h-20 rounded-lg border border-border bg-background px-3 py-2 text-foreground"
+            className="min-h-24 w-full max-w-full rounded-lg border border-border bg-background px-3 py-3 text-foreground sm:min-h-20 sm:py-2"
             maxLength={280}
             name="note"
             placeholder="Opcjonalnie"
           />
         </label>
 
-        <label className="grid gap-2 text-sm">
+        <label className="grid min-w-0 gap-2 text-sm">
           <span className="text-muted-foreground">Kod drużyny</span>
           <input
-            className="rounded-lg border border-border bg-background px-3 py-2 text-foreground"
+            className="w-full max-w-full rounded-lg border border-border bg-background px-3 py-3 text-foreground sm:py-2"
             name="writeCode"
             ref={teamCodeInputRef}
             required
             type="password"
           />
-          <span className="text-xs leading-5 text-muted-foreground">
+          <span className="break-words text-xs leading-5 text-muted-foreground">
             Potrzebny tylko po to, żeby przypadkowy goblin z internetu nie
             dopisał nam 900 pompek.
           </span>
         </label>
 
-        <div className="flex flex-col gap-3 rounded-lg border border-border/70 bg-muted p-3 text-sm sm:flex-row sm:items-center sm:justify-between">
-          <div className="grid gap-2">
-            <span className="text-muted-foreground">
+        <div className="flex min-w-0 flex-col gap-3 rounded-lg border border-border/70 bg-muted p-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+          <div className="grid min-w-0 gap-2">
+            <span className="break-words text-muted-foreground">
               Podgląd wkładu:{" "}
               <strong className="text-foreground">{previewPoints} pkt</strong>
             </span>
             {bonusLabels.length > 0 ? (
-              <div className="flex flex-wrap gap-2">
+              <div className="flex min-w-0 flex-wrap gap-2">
                 {bonusLabels.map((label) => (
                   <span
-                    className="w-fit rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-xs text-accent"
+                    className="max-w-full break-words rounded-full border border-accent/40 bg-accent/10 px-2 py-0.5 text-xs text-accent"
                     key={label}
                   >
                     {label}
@@ -227,7 +227,9 @@ export function ActivityForm({
         {state.message ? (
           <p
             className={
-              state.ok ? "text-sm text-accent" : "text-sm text-destructive"
+              state.ok
+                ? "break-words text-sm text-accent"
+                : "break-words text-sm text-destructive"
             }
           >
             {state.message}

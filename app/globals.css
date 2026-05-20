@@ -123,11 +123,13 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
     background:
       radial-gradient(circle at top left, oklch(0.28 0.07 175 / 45%), transparent 34rem),
       linear-gradient(145deg, oklch(0.16 0.05 220), oklch(0.19 0.05 155) 58%, oklch(0.13 0.04 220));
   }
   html {
     @apply font-sans;
+    overflow-x: hidden;
   }
 }

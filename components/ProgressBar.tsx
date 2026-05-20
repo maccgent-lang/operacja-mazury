@@ -15,33 +15,35 @@ export function ProgressBar({
   milestones,
 }: ProgressBarProps) {
   return (
-    <section className="rounded-xl border border-accent/40 bg-card p-5 text-card-foreground shadow-2xl shadow-black/25 sm:p-6">
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-        <div>
+    <section className="w-full max-w-full overflow-hidden rounded-xl border border-accent/40 bg-card p-4 text-card-foreground shadow-2xl shadow-black/25 sm:p-6">
+      <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div className="min-w-0">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
             Postęp załogi
           </h2>
-          <p className="text-sm text-muted-foreground">
+          <p className="break-words text-sm text-muted-foreground">
             {currentPoints} z {targetPoints} pkt do wspólnego celu
           </p>
-          <p className="mt-3 text-sm font-medium text-foreground">
+          <p className="mt-3 break-words text-sm font-medium text-foreground">
             Cel: 10 000 pkt = fancy lunch na podróż dla całej załogi.
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="break-words text-xs text-muted-foreground">
             Menu jeszcze owiane mgłą, ale ambicje są niepokojąco wysokie.
           </p>
         </div>
-        <p className="text-3xl font-semibold text-accent">{progressPercent}%</p>
+        <p className="text-2xl font-semibold text-accent sm:text-3xl">
+          {progressPercent}%
+        </p>
       </div>
 
-      <div className="mt-5 h-4 overflow-hidden rounded-full border border-border/70 bg-muted">
+      <div className="mt-5 h-4 w-full overflow-hidden rounded-full border border-border/70 bg-muted">
         <div
           className="h-full rounded-full bg-primary shadow-[0_0_18px_var(--primary)]"
           style={{ width: `${progressPercent}%` }}
         />
       </div>
 
-      <div className="relative mt-2 h-7">
+      <div className="relative mt-2 h-4 w-full">
         {milestones.map((milestone) => {
           const tickPosition = Math.min(
             (milestone.points / targetPoints) * 100,
@@ -63,7 +65,7 @@ export function ProgressBar({
                     : "h-3 w-0.5 rounded-full bg-border"
                 }
               />
-              <span className="text-[10px] font-medium text-muted-foreground">
+              <span className="hidden text-[10px] font-medium text-muted-foreground sm:block">
                 {milestone.points / 1000}k
               </span>
             </div>
@@ -71,7 +73,7 @@ export function ProgressBar({
         })}
       </div>
 
-      <div className="mt-4 grid gap-2 sm:grid-cols-5">
+      <div className="mt-4 grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-5">
         {milestones.map((milestone) => {
           const isReached = currentPoints >= milestone.points;
 
@@ -87,7 +89,7 @@ export function ProgressBar({
               <p className="text-xs font-semibold text-foreground">
                 {milestone.points} pkt
               </p>
-              <p className="text-xs leading-5 text-muted-foreground">
+              <p className="break-words text-xs leading-5 text-muted-foreground">
                 {milestone.label}
               </p>
             </div>

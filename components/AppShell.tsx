@@ -69,13 +69,13 @@ export function AppShell({
     }));
 
   return (
-    <main className="min-h-screen bg-transparent px-4 py-6 text-foreground sm:px-6 sm:py-10">
-      <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
-        <section className="flex flex-col gap-4 rounded-xl border border-border/70 bg-card/45 p-5 shadow-2xl shadow-black/20 backdrop-blur sm:p-6">
-          <p className="text-sm font-medium uppercase tracking-wide text-accent">
+    <main className="min-h-screen w-full max-w-full overflow-x-hidden bg-transparent px-3 py-5 text-foreground sm:px-6 sm:py-10">
+      <div className="mx-auto flex w-full max-w-5xl min-w-0 flex-col gap-6 sm:gap-8">
+        <section className="flex min-w-0 flex-col gap-4 overflow-hidden rounded-xl border border-border/70 bg-card/45 p-4 shadow-2xl shadow-black/20 backdrop-blur sm:p-6">
+          <p className="break-words text-xs font-medium uppercase tracking-wide text-accent sm:text-sm">
             Dashboard wyprawy
           </p>
-          <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="break-words text-2xl font-semibold tracking-tight text-foreground sm:text-5xl">
             Wyprawa po Złote Gacie Kąpielowe
           </h1>
           <p className="max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
@@ -96,18 +96,18 @@ export function AppShell({
           players={players}
         />
 
-        <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)]">
+        <section className="grid min-w-0 grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)]">
           <ActivityFeed activities={recentActivities} />
 
-          <section className="flex flex-col gap-3">
-            <div>
+          <section className="flex min-w-0 flex-col gap-3">
+            <div className="min-w-0">
               <h2 className="text-xl font-semibold tracking-tight">Załoga</h2>
               <p className="text-sm text-muted-foreground">
                 Profile załogi biorącej udział we wspólnej wyprawie.
               </p>
             </div>
 
-            <div className="grid gap-3">
+            <div className="grid min-w-0 grid-cols-1 gap-3">
               {players.map((player) => (
                 <PlayerCard
                   key={player.id}
