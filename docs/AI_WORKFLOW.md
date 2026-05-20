@@ -99,12 +99,13 @@ git commit -m "WIP: <TASK_ID> implementation"
 Wyciągasz czysty przyrost zmian z obecnego zadania, omijając śmieci konfiguracyjne, które marnują Context Window.
 
 ```bash
-# Zwróć uwagę na trzy kropki (...) oraz wykluczenia
-git diff main...HEAD -- . ':(exclude)pnpm-lock.yaml' > review.diff
+git diff main --stat > review-reports/review-stat.txt
+git diff main --name-status > review-reports/review-files.txt
+git diff main -- . ':(exclude)pnpm-lock.yaml' > review-reports/review.diff
 ```
 Jeśli zmiana dotyczy zależności, nie wykluczaj lockfile’a:
 ```bash
-git diff main...HEAD -- . > review.diff
+git diff main...HEAD -- . > review-reports/review.diff
 ```
 
 **Akcja:** Akcja: Wrzucasz do Reviewera:
@@ -121,6 +122,12 @@ Task:
 
 Acceptance Criteria:
 [wklej sekcję taska z TASKS.md]
+
+Zmodyfikowane pliki:
+[paste git diff --name-status]
+
+Statystyka zmian:
+[paste git diff --stat]
 
 Commands:
 - pnpm test: PASS / FAIL / N/A
@@ -169,12 +176,11 @@ git diff main...HEAD -- . > review.diff
 Reviewer zgłasza brak uwag. Kod spełnia kryteria.
 
 ```bash
+git push origin task/<TASK_ID>-<task-slug>
+#Create Pull Request
+#Squash and merge
 git checkout main
-git pull --ff-only
-# Squash merge do czystej historii:
-git merge task/<TASK_ID>-<task-slug> --squash
-git commit -m "feat(<TASK_ID>): <task-slug>"
-# Usuń branch roboczy
+git pull
 git branch -D task/<TASK_ID>-<task-slug>
 ```
 **Akcja:** Zaktualizuj TASKS.md:

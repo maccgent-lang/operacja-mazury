@@ -21,10 +21,10 @@ export function ActivityFeed({ activities }: ActivityFeedProps) {
     <section className="flex flex-col gap-3">
       <div>
         <h2 className="text-xl font-semibold tracking-tight">
-          Recent activities
+          Ostatnie wpisy
         </h2>
         <p className="text-sm text-muted-foreground">
-          Latest mock activity entries.
+          Najnowsze aktywności dodane do wyprawy.
         </p>
       </div>
 
@@ -46,7 +46,7 @@ export function ActivityFeed({ activities }: ActivityFeedProps) {
               <div className="text-sm text-muted-foreground sm:text-right">
                 <p>{activity.occurredOn}</p>
                 <p className="font-medium text-accent">
-                  {activity.points} points
+                  {activity.points} pkt dla załogi
                 </p>
               </div>
             </div>

@@ -24,6 +24,14 @@
 
 ### QG1 — Static mock dashboard complete
 
+Status: DONE
+
+Notes:
+- Accepted as bootstrap checkpoint covering T00–T04.
+- Reviewer approved UI/T04 with comments.
+- No ranking after cleanup.
+- Follow-up needed: unify mixed PL/EN UI copy.
+
 After T04.
 
 Required:
@@ -36,6 +44,7 @@ Required:
 - no shaming copy
 
 ### QG2 — Game config and local logic complete
+Status:TODO
 
 After T10.
 
@@ -49,6 +58,7 @@ Required:
 - prenatal filtering tests pass
 
 ### QG3 — Mock form complete
+Status:TODO
 
 After T12.
 
@@ -61,6 +71,7 @@ Required:
 - no real persistence yet
 
 ### QG4 — Supabase persistence complete
+Status:TODO
 
 After T16.
 
@@ -74,6 +85,7 @@ Required:
 - no service role key leaks to client
 
 ### QG5 — MVP release candidate
+Status:TODO
 
 After T19.
 
@@ -92,7 +104,7 @@ Required:
 
 ### T00 — Add AI workflow files
 
-Status: TODO
+Status: DONE
 
 Goal:
 Add project-level workflow files for AI-assisted development.
@@ -124,7 +136,7 @@ Manual QA:
 
 ### T01 — Create base app shell
 
-Status: TODO
+Status: DONE
 
 Goal:
 Create a simple one-page app shell for the dashboard.
@@ -154,7 +166,7 @@ Manual QA:
 
 ### T02 — Add mock data
 
-Status: TODO
+Status: DONE
 
 Goal:
 Add local mock data for players and activity logs.
@@ -181,7 +193,7 @@ Manual QA:
 
 ### T03 — Create static dashboard sections
 
-Status: TODO
+Status: DONE
 
 Goal:
 Render the main dashboard sections using mock data.
@@ -215,7 +227,7 @@ Manual QA:
 
 ### T04 — Add basic visual direction
 
-Status: TODO
+Status: DONE
 
 Goal:
 Apply initial Mazury/RPG visual style.
@@ -242,6 +254,38 @@ Manual QA:
 - Confirm UI does not look like a corporate fitness dashboard.
 
 ---
+
+### T04.1 — Unify dashboard copy language
+
+Status: DONE
+
+Goal:
+Unify visible dashboard copy to Polish and align it with the local Mazury/RPG tone.
+
+Scope:
+- Existing dashboard UI copy only
+- Section headings
+- Empty states / helper labels if present
+- Mock activity labels if visible
+
+Acceptance criteria:
+- No mixed PL/EN headings on the dashboard.
+- Replace generic SaaS-like copy with Polish Mazury/team-oriented copy.
+- Shared progress remains the main focus.
+- Player cards remain neutral crew profiles, not rankings.
+- No business logic changes.
+- No new dependencies.
+- No layout redesign.
+
+Commands:
+- pnpm lint
+- pnpm build
+
+Manual QA:
+- Open `/`.
+- Confirm all visible dashboard copy is in Polish.
+- Confirm copy does not feel like a generic SaaS demo.
+- Confirm no ranking/shaming language appears.
 
 ## Faza 2 — Config gry
 

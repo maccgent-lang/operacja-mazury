@@ -43,3 +43,5 @@ next-env.d.ts
 # Local diffs and reviews
 *.diff
 *.patch
+review-*
+review-reports/

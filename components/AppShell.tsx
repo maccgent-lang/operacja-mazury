@@ -1,14 +1,13 @@
 import { ActivityFeed, type ActivityFeedItem } from "@/components/ActivityFeed";
 import { PlayerCard } from "@/components/PlayerCard";
 import { ProgressBar } from "@/components/ProgressBar";
+import { GAME_CONFIG } from "@/config/game";
 import { mockActivityLogs, mockPlayers } from "@/lib/mock-data";
-
-const TARGET_POINTS = 10000;
 
 export function AppShell() {
   const totalPoints = mockActivityLogs.reduce((sum, log) => sum + log.points, 0);
   const progressPercent = Math.min(
-    Math.round((totalPoints / TARGET_POINTS) * 100),
+    Math.round((totalPoints / GAME_CONFIG.targetPoints) * 100),
     100,
   );
 
@@ -33,7 +32,7 @@ export function AppShell() {
     .sort((first, second) => second.occurredOn.localeCompare(first.occurredOn))
     .map((log) => ({
       id: log.id,
-      playerName: playerNames.get(log.playerId) ?? "Unknown player",
+      playerName: playerNames.get(log.playerId) ?? "Nieznany członek załogi",
       activityKey: log.activityKey,
       quantity: log.quantity,
       points: log.points,
@@ -46,20 +45,19 @@ export function AppShell() {
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-8">
         <section className="flex flex-col gap-4 rounded-xl border border-border/70 bg-card/45 p-5 shadow-2xl shadow-black/20 backdrop-blur sm:p-6">
           <p className="text-sm font-medium uppercase tracking-wide text-accent">
-            Team quest dashboard
+            Dashboard wyprawy
           </p>
           <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
             Operacja Mazury
           </h1>
           <p className="max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
-            Shared movement toward the lake, with every entry adding to the
-            crew total.
+            Każdy wpis dokłada coś do wspólnej drogi nad jezioro.
           </p>
         </section>
 
         <ProgressBar
           currentPoints={totalPoints}
-          targetPoints={TARGET_POINTS}
+          targetPoints={GAME_CONFIG.targetPoints}
           progressPercent={progressPercent}
         />
 
@@ -70,7 +68,7 @@ export function AppShell() {
             <div>
               <h2 className="text-xl font-semibold tracking-tight">Załoga</h2>
               <p className="text-sm text-muted-foreground">
-                Neutral crew profiles for the shared trip effort.
+                Profile załogi biorącej udział we wspólnej wyprawie.
               </p>
             </div>
 
