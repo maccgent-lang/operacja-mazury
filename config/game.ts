@@ -1,5 +1,5 @@
 export const GAME_CONFIG = {
-  name: "Operacja Mazury",
+  name: "Wyprawa po Złote Gacie Kąpielowe",
   targetPoints: 10000,
   tripDate: "2026-06-03",
   milestones: [

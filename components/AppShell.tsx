@@ -76,7 +76,7 @@ export function AppShell({
             Dashboard wyprawy
           </p>
           <h1 className="text-3xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            Operacja Mazury
+            Wyprawa po Złote Gacie Kąpielowe
           </h1>
           <p className="max-w-2xl text-sm leading-6 text-muted-foreground sm:text-base">
             Każdy wpis dokłada coś do wspólnej drogi nad jezioro.
