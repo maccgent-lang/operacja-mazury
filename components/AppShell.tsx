@@ -1,23 +1,39 @@
 import { ActivityFeed, type ActivityFeedItem } from "@/components/ActivityFeed";
+import { ActivityForm } from "@/components/ActivityForm";
 import { PlayerCard } from "@/components/PlayerCard";
 import { ProgressBar } from "@/components/ProgressBar";
+import { ACTIVITIES, DURATION_BUCKETS } from "@/config/activities";
 import { GAME_CONFIG } from "@/config/game";
-import { mockActivityLogs, mockPlayers } from "@/lib/mock-data";
+import {
+  calculateProgressPercent,
+  calculateTeamPoints,
+} from "@/lib/progress";
+import type { ActivityLog, Player } from "@/types/domain";
 
-export function AppShell() {
-  const totalPoints = mockActivityLogs.reduce((sum, log) => sum + log.points, 0);
-  const progressPercent = Math.min(
-    Math.round((totalPoints / GAME_CONFIG.targetPoints) * 100),
-    100,
+type AppShellProps = {
+  players: Player[];
+  activityLogs: ActivityLog[];
+  isSupabaseConfigured: boolean;
+};
+
+export function AppShell({
+  players,
+  activityLogs,
+  isSupabaseConfigured,
+}: AppShellProps) {
+  const totalPoints = calculateTeamPoints(activityLogs);
+  const progressPercent = calculateProgressPercent(
+    totalPoints,
+    GAME_CONFIG.targetPoints,
   );
 
   const playerPoints = new Map<string, number>();
 
-  for (const player of mockPlayers) {
+  for (const player of players) {
     playerPoints.set(player.id, 0);
   }
 
-  for (const log of mockActivityLogs) {
+  for (const log of activityLogs) {
     playerPoints.set(
       log.playerId,
       (playerPoints.get(log.playerId) ?? 0) + log.points,
@@ -25,15 +41,27 @@ export function AppShell() {
   }
 
   const playerNames = new Map(
-    mockPlayers.map((player) => [player.id, player.name]),
+    players.map((player) => [player.id, player.name]),
+  );
+  const activityLabels = new Map(
+    ACTIVITIES.map((activity) => [activity.key, activity.label]),
+  );
+  const durationBucketLabels = new Map(
+    DURATION_BUCKETS.map((bucket) => [
+      bucket.key,
+      `${bucket.label} (${bucket.rangeLabel})`,
+    ]),
   );
 
-  const recentActivities: ActivityFeedItem[] = [...mockActivityLogs]
+  const recentActivities: ActivityFeedItem[] = [...activityLogs]
     .sort((first, second) => second.occurredOn.localeCompare(first.occurredOn))
     .map((log) => ({
       id: log.id,
       playerName: playerNames.get(log.playerId) ?? "Nieznany członek załogi",
-      activityKey: log.activityKey,
+      activityLabel: activityLabels.get(log.activityKey) ?? log.activityKey,
+      durationLabel: log.durationBucket
+        ? durationBucketLabels.get(log.durationBucket)
+        : undefined,
       quantity: log.quantity,
       points: log.points,
       occurredOn: log.occurredOn,
@@ -57,8 +85,15 @@ export function AppShell() {
 
         <ProgressBar
           currentPoints={totalPoints}
+          milestones={GAME_CONFIG.milestones}
           targetPoints={GAME_CONFIG.targetPoints}
           progressPercent={progressPercent}
+        />
+
+        <ActivityForm
+          activities={ACTIVITIES}
+          isSupabaseConfigured={isSupabaseConfigured}
+          players={players}
         />
 
         <section className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(18rem,24rem)]">
@@ -73,9 +108,10 @@ export function AppShell() {
             </div>
 
             <div className="grid gap-3">
-              {mockPlayers.map((player) => (
+              {players.map((player) => (
                 <PlayerCard
                   key={player.id}
+                  isSupabaseConfigured={isSupabaseConfigured}
                   player={player}
                   points={playerPoints.get(player.id) ?? 0}
                 />

@@ -1,7 +1,8 @@
 export type ActivityFeedItem = {
   id: string;
   playerName: string;
-  activityKey: string;
+  activityLabel: string;
+  durationLabel?: string;
   quantity: number;
   points: number;
   occurredOn: string;
@@ -11,10 +12,6 @@ export type ActivityFeedItem = {
 type ActivityFeedProps = {
   activities: ActivityFeedItem[];
 };
-
-function formatActivityKey(activityKey: string) {
-  return activityKey.replaceAll("-", " ");
-}
 
 export function ActivityFeed({ activities }: ActivityFeedProps) {
   return (
@@ -29,6 +26,13 @@ export function ActivityFeed({ activities }: ActivityFeedProps) {
       </div>
 
       <div className="grid gap-3">
+        {activities.length === 0 ? (
+          <p className="rounded-lg border border-border/80 bg-card/85 p-4 text-sm text-muted-foreground">
+            Brak wpisów w dzienniku. Pierwsza aktywność załogi może pojawić się
+            tutaj po zapisie.
+          </p>
+        ) : null}
+
         {activities.map((activity) => (
           <article
             key={activity.id}
@@ -40,7 +44,8 @@ export function ActivityFeed({ activities }: ActivityFeedProps) {
                   {activity.playerName}
                 </p>
                 <p className="text-sm capitalize text-muted-foreground">
-                  {formatActivityKey(activity.activityKey)} - {activity.quantity}
+                  {activity.activityLabel}
+                  {activity.durationLabel ? ` - ${activity.durationLabel}` : ""}
                 </p>
               </div>
               <div className="text-sm text-muted-foreground sm:text-right">
