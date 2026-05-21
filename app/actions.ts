@@ -31,10 +31,6 @@ function getString(formData: FormData, key: string) {
   return typeof value === "string" ? value.trim() : "";
 }
 
-function hasValidWriteCode(writeCode: string) {
-  return Boolean(process.env.TEAM_WRITE_CODE) && writeCode === process.env.TEAM_WRITE_CODE;
-}
-
 function isSelectableClass(classKey: string): classKey is CharacterClass {
   return SELECTABLE_CHARACTER_CLASSES.some((characterClass) => {
     return characterClass.key === classKey;
@@ -47,26 +43,10 @@ export async function addActivity(
 ): Promise<ActivityActionState> {
   void previousState;
 
-  if (!process.env.TEAM_WRITE_CODE) {
-    return {
-      ok: false,
-      message: "Brak konfiguracji TEAM_WRITE_CODE po stronie serwera.",
-    };
-  }
-
   if (!isSupabaseConfigured()) {
     return {
       ok: false,
       message: "Brak konfiguracji Supabase po stronie serwera.",
-    };
-  }
-
-  const writeCode = getString(formData, "writeCode");
-
-  if (!hasValidWriteCode(writeCode)) {
-    return {
-      ok: false,
-      message: "Kod drużyny jest nieprawidłowy.",
     };
   }
 
@@ -164,26 +144,10 @@ export async function updatePlayerClass(
 ): Promise<PlayerClassActionState> {
   void previousState;
 
-  if (!process.env.TEAM_WRITE_CODE) {
-    return {
-      ok: false,
-      message: "Brak konfiguracji TEAM_WRITE_CODE po stronie serwera.",
-    };
-  }
-
   if (!isSupabaseConfigured()) {
     return {
       ok: false,
       message: "Brak konfiguracji Supabase po stronie serwera.",
-    };
-  }
-
-  const writeCode = getString(formData, "writeCode");
-
-  if (!hasValidWriteCode(writeCode)) {
-    return {
-      ok: false,
-      message: "Kod drużyny jest nieprawidłowy.",
     };
   }
 

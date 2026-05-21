@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useState } from "react";
 import {
   updatePlayerClass,
   type PlayerClassActionState,
@@ -22,7 +22,6 @@ const initialState: PlayerClassActionState = {
   ok: false,
   message: "",
 };
-const teamCodeStorageKey = "operacja-mazury-team-code";
 
 export function ClassSelect({
   playerKey,
@@ -33,25 +32,8 @@ export function ClassSelect({
   const [state, formAction] = useActionState(updatePlayerClass, initialState);
   const [selectedClass, setSelectedClass] =
     useState<CharacterClass>(currentClass);
-  const teamCodeInputRef = useRef<HTMLInputElement>(null);
   const selectedClassConfig = getCharacterClassConfig(selectedClass);
   const isDisabled = !isSupabaseConfigured;
-
-  useEffect(() => {
-    const savedTeamCode = window.localStorage.getItem(teamCodeStorageKey);
-
-    if (teamCodeInputRef.current && savedTeamCode) {
-      teamCodeInputRef.current.value = savedTeamCode;
-    }
-  }, []);
-
-  useEffect(() => {
-    const submittedTeamCode = teamCodeInputRef.current?.value;
-
-    if (state.ok && submittedTeamCode) {
-      window.localStorage.setItem(teamCodeStorageKey, submittedTeamCode);
-    }
-  }, [state.ok]);
 
   if (classLocked || state.ok) {
     return null;
@@ -89,18 +71,6 @@ export function ClassSelect({
         </p>
         <p className="break-words">{selectedClassConfig.bonusLabel}</p>
       </div>
-
-      <label className="grid min-w-0 gap-1">
-        <span className="text-muted-foreground">Kod drużyny</span>
-        <input
-          className="w-full max-w-full rounded-md border border-border bg-background px-2 py-2 text-foreground"
-          disabled={!isSupabaseConfigured}
-          name="writeCode"
-          ref={teamCodeInputRef}
-          required
-          type="password"
-        />
-      </label>
 
       <button
         className="w-full rounded-md border border-accent/50 px-3 py-2 text-xs font-medium text-accent disabled:cursor-not-allowed disabled:opacity-60 sm:w-fit"

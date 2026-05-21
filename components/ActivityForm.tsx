@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useEffect, useMemo, useRef, useState } from "react";
+import { useActionState, useMemo, useState } from "react";
 import { addActivity, type ActivityActionState } from "@/app/actions";
 import { DURATION_BUCKETS } from "@/config/activities";
 import { calculatePointBreakdown } from "@/lib/scoring";
@@ -20,8 +20,6 @@ const initialState: ActivityActionState = {
   ok: false,
   message: "",
 };
-
-const teamCodeStorageKey = "operacja-mazury-team-code";
 
 function SubmitButton() {
   return (
@@ -44,23 +42,6 @@ export function ActivityForm({
   const [activityKey, setActivityKey] = useState(activities[0]?.key ?? "");
   const [durationBucket, setDurationBucket] =
     useState<DurationBucketKey>("normal");
-  const teamCodeInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    const savedTeamCode = window.localStorage.getItem(teamCodeStorageKey);
-
-    if (teamCodeInputRef.current && savedTeamCode) {
-      teamCodeInputRef.current.value = savedTeamCode;
-    }
-  }, []);
-
-  useEffect(() => {
-    const submittedTeamCode = teamCodeInputRef.current?.value;
-
-    if (state.ok && submittedTeamCode) {
-      window.localStorage.setItem(teamCodeStorageKey, submittedTeamCode);
-    }
-  }, [state.ok]);
 
   const selectedPlayer = players.find((player) => player.id === playerKey);
   const availableActivities = useMemo(() => {
@@ -185,21 +166,6 @@ export function ActivityForm({
             name="note"
             placeholder="Opcjonalnie"
           />
-        </label>
-
-        <label className="grid min-w-0 gap-2 text-sm">
-          <span className="text-muted-foreground">Kod drużyny</span>
-          <input
-            className="w-full max-w-full rounded-lg border border-border bg-background px-3 py-3 text-foreground sm:py-2"
-            name="writeCode"
-            ref={teamCodeInputRef}
-            required
-            type="password"
-          />
-          <span className="break-words text-xs leading-5 text-muted-foreground">
-            Potrzebny tylko po to, żeby przypadkowy goblin z internetu nie
-            dopisał nam 900 pompek.
-          </span>
         </label>
 
         <div className="flex min-w-0 flex-col gap-3 rounded-lg border border-border/70 bg-muted p-3 text-sm sm:flex-row sm:items-center sm:justify-between">
